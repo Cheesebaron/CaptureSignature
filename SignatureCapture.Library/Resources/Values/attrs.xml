@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="signaturecapture">
+    <attr name="paint_color" format="color" />
+    <attr name="stroke_width" format="float" />
+    <attr name="background_color" format="color" />
+    <attr name="stroke_cap">
+      <enum name="round" value="0" />
+      <enum name="butt" value="1" />
+      <enum name="square" value="2" />
+    </attr>
+    <attr name="stroke_join">
+      <enum name="round" value="0" />
+      <enum name="miter" value="1" />
+      <enum name="bevel" value="2" />
+    </attr>
+    <attr name="stroke_style">
+      <enum name="stroke" value="0" />
+      <enum name="fill" value="1" />
+      <enum name="fill_and_stroke" value="2" />
+    </attr>
+  </declare-styleable>
+</resources>
