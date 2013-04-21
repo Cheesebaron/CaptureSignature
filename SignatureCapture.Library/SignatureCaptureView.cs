@@ -125,7 +125,7 @@ namespace SignatureCapture.Library
             //If attributes exist then let's go ahead and set them up
             StrokeWidth = attributes.GetFloat(Resource.Styleable.signaturecapture_stroke_width, 12.0f);
             StrokeColor = attributes.GetColor(Resource.Styleable.signaturecapture_paint_color, StrokeColor);
-            BackgroundColor = attributes.GetColor(Resource.Styleable.signaturecapture_paint_color, BackgroundColor);
+            BackgroundColor = attributes.GetColor(Resource.Styleable.signaturecapture_background_color, BackgroundColor);
             StrokeJoin = (StrokeJoin)attributes.GetInt(Resource.Styleable.signaturecapture_stroke_join, 0);
             StrokeStyle = (StrokeStyle)attributes.GetInt(Resource.Styleable.signaturecapture_stroke_style, 0);
             StrokeCap = (StrokeCap)attributes.GetInt(Resource.Styleable.signaturecapture_stroke_cap, 0);

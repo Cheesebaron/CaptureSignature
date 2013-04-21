@@ -8,6 +8,9 @@
   <signaturecapture.library.SignatureCaptureView
     android:id="@+id/capture_view"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"/>
+    android:layout_height="fill_parent"
+    sig:stroke_width="30"
+    sig:paint_color="#00cc99"
+    sig:background_color="#000000"/>
 
 </LinearLayout>
