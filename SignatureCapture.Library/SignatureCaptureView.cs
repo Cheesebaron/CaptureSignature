@@ -78,6 +78,7 @@ namespace SignatureCapture.Library
 
         private void Init(Android.Content.Res.TypedArray attributes)
         {
+            ResourceIdManager.UpdateIdValues();
             _path = new Path();
             _bitmapPaint = new Paint(PaintFlags.Dither);
             _paint = new Paint
@@ -91,8 +92,8 @@ namespace SignatureCapture.Library
 
             _paint.SetStyle(Paint.Style.Stroke);
 
-            BackgroundColor = Color.White;//Resources.GetColor(Resource.Color.signaturecapture_white);
-            StrokeColor = Color.Black;//Resources.GetColor(Resource.Color.signaturecapture_black);
+            BackgroundColor = Resources.GetColor(Resource.Color.signaturecapture_white);
+            StrokeColor = Resources.GetColor(Resource.Color.signaturecapture_black);
             if (attributes == null)
             {
                 return;

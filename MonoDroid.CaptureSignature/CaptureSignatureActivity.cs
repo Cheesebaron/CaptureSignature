@@ -29,7 +29,7 @@ using SignatureCapture.Library;
 
 namespace SignatureCapture.Sample
 {
-    [Activity(Label = "Capture Signature", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Signature Capture", MainLauncher = true, Icon = "@drawable/ic_launcher")]
     public class CaptureSignatureActivity : Activity
     {
         private Library.SignatureCaptureView m_SignatureCapture;
@@ -219,7 +219,7 @@ namespace SignatureCapture.Sample
         /// </summary>
         private void SaveToSd()
         {
-            bool success = SignatureCapture.Library.SignatureCaptureUtils.SaveToSd(m_SignatureCapture, "signaturecapture",
+            bool success = SignatureCapture.Library.SignatureCaptureUtils.SaveToPicturesFolder(m_SignatureCapture, "signaturecapture",
                                                                     Guid.NewGuid().ToString());
 
             if (!success)

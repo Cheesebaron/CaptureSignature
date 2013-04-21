@@ -30,6 +30,43 @@ namespace SignatureCapture.Library
         /// <param name="folderName">What folder to put it in</param>
         /// <param name="fileName">Name of the file (.png will be added)</param>
         /// <returns></returns>
+        public static bool SaveToPicturesFolder(SignatureCaptureView capture, string folderName = null, string fileName = null)
+        {
+            try
+            {
+                var path =
+                    Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures);
+
+                var folder = path .AbsolutePath +
+                            Java.IO.File.Separator +
+                            (string.IsNullOrWhiteSpace(folderName) ? "MySignatures" : folderName);
+                var extFileName = folder +
+                                  Java.IO.File.Separator +
+                                  (string.IsNullOrWhiteSpace(fileName) ? Guid.NewGuid().ToString() : fileName) + ".png";
+
+                if (!Directory.Exists(folder))
+                    Directory.CreateDirectory(folder);
+
+                using (var fs = new FileStream(extFileName, FileMode.OpenOrCreate))
+                {
+                    capture.CanvasBitmap.Compress(Bitmap.CompressFormat.Png, 100, fs);
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Saves the current signature out to the SD card
+        /// </summary>
+        /// <param name="capture">capture to save out</param>
+        /// <param name="folderName">What folder to put it in</param>
+        /// <param name="fileName">Name of the file (.png will be added)</param>
+        /// <returns></returns>
         public static bool SaveToSd(SignatureCaptureView capture, string folderName = null, string fileName = null)
         {
             try
