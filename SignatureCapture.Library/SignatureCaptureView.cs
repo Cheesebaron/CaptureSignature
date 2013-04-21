@@ -1,6 +1,22 @@
+/*
+ * Copyright (C) 2013 Tomasz Cielecki (Twitter: @Cheesebaron)
+ * Copyright (C) 2013 James Montemagno (Twitter: @JamesMontemagno)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 using System;
 using Android.Content;
-using Android.Content.Res;
 using Android.Graphics;
 using Android.Util;
 using Android.Views;
@@ -34,11 +50,17 @@ namespace SignatureCapture.Library
         private Path _path;
         private Paint _bitmapPaint;
         private Paint _paint;
-        private Color _backgroundColor;
 
 
         private float _mX, _mY;
         private const float TouchTolerance = 4;
+
+        public SignatureCaptureView(Context context, IAttributeSet attrs, int defStyle)
+        : base(context, attrs, defStyle)
+        {
+            var a = context.ObtainStyledAttributes(attrs, Resource.Styleable.signaturecapture);
+            Init(a);
+        }
 
         public SignatureCaptureView(Context context, IAttributeSet attrs)
             : base(context, attrs)
@@ -54,22 +76,23 @@ namespace SignatureCapture.Library
             Init(null);
         }
 
-        private void Init(TypedArray attributes)
+        private void Init(Android.Content.Res.TypedArray attributes)
         {
             _path = new Path();
             _bitmapPaint = new Paint(PaintFlags.Dither);
             _paint = new Paint
-                    {
-                        AntiAlias = true,
-                        Dither = true,
-                        Color = Color.Argb(255, 0, 0, 0)
-                    };
-            _paint.SetStyle(Paint.Style.Stroke);
-            _paint.StrokeJoin = Paint.Join.Round;
-            _paint.StrokeCap = Paint.Cap.Round;
-            _paint.StrokeWidth = 12;
+                {
+                    AntiAlias = true,
+                    Dither = true,
+                    StrokeJoin = Paint.Join.Round,
+                    StrokeCap = Paint.Cap.Round,
+                    StrokeWidth = 12,
+                };
 
-            BackgroundColor = Resources.GetColor(Resource.Color.signaturecapture_white);
+            _paint.SetStyle(Paint.Style.Stroke);
+
+            BackgroundColor = Color.White;//Resources.GetColor(Resource.Color.signaturecapture_white);
+            StrokeColor = Color.Black;//Resources.GetColor(Resource.Color.signaturecapture_black);
             if (attributes == null)
             {
                 return;
@@ -82,6 +105,7 @@ namespace SignatureCapture.Library
             StrokeJoin = (StrokeJoin)attributes.GetInt(Resource.Styleable.signaturecapture_stroke_join, 0);
             StrokeStyle = (StrokeStyle)attributes.GetInt(Resource.Styleable.signaturecapture_stroke_style, 0);
             StrokeCap = (StrokeCap)attributes.GetInt(Resource.Styleable.signaturecapture_stroke_cap, 0);
+            attributes.Recycle();
         }
 
 
@@ -223,10 +247,10 @@ namespace SignatureCapture.Library
         /// </summary>
         public Color BackgroundColor
         {
-            get { return _paint.Color; }
+            get { return _bitmapPaint.Color; }
             set
             {
-                _paint.Color = value;
+                _bitmapPaint.Color = value;
             }
         }
 
@@ -315,7 +339,7 @@ namespace SignatureCapture.Library
 
         public void ClearCanvas()
         {
-            _canvas.DrawColor(_backgroundColor);
+            _canvas.DrawColor(BackgroundColor);
             Invalidate();
         }
     }

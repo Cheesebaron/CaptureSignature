@@ -25,7 +25,7 @@ using Android.Graphics;
 using Android.OS;
 using Android.Views;
 
-namespace MonoDroid.CaptureSignature
+namespace SignatureCapture.Sample
 {
     public class ColorChangedEventArgs : EventArgs
     {

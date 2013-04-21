@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="internalOnly" package="monodroid.capturesignature" android:versionCode="1" android:versionName="1.0">
-  <uses-sdk android:targetSdkVersion="8" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" package="com.refractored.signaturecapture" android:versionCode="1" android:versionName="1.0">
+  <uses-sdk  android:minSdkVersion="8" android:targetSdkVersion="16" />
   <application android:label="Capture Signature">
   </application>
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

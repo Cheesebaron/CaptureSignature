@@ -14,5 +14,28 @@
     <item>10</item>
     <item>11</item>
     <item>12</item>
+    <item>13</item>
+    <item>14</item>
+    <item>15</item>
+    <item>16</item>
+    <item>17</item>
+    <item>18</item>
+    <item>19</item>
+    <item>20</item>
+  </string-array>
+  <string-array name="stroke_joins">
+    <item>round</item>
+    <item>miter</item>
+    <item>bevel</item>
+  </string-array>
+  <string-array name="stroke_caps">
+    <item>round</item>
+    <item>butt</item>
+    <item>square</item>
+  </string-array>
+  <string-array name="stroke_styles">
+    <item>stroke</item>
+    <item>fill</item>
+    <item>fill+stroke</item>
   </string-array>
 </resources>
