@@ -19,6 +19,8 @@
  * limitations under the License.
  */
 
+//#define TESTSAVE
+
 using System;
 using Android.App;
 using Android.Graphics;
@@ -42,8 +44,22 @@ namespace SignatureCapture.Sample
 
             m_SignatureCapture = FindViewById<Library.SignatureCaptureView>(Resource.Id.capture_view);
 
-
+#if TESTSAVE
+            var saveState = LastNonConfigurationInstance as SaveData;
+            if (saveState != null)
+            {
+                m_SignatureCapture.LoadSaveData(saveState);
+            }
+#endif
         }
+
+
+#if TESTSAVE
+        public override Java.Lang.Object OnRetainNonConfigurationInstance()
+        {
+            return m_SignatureCapture.CaptureSave;
+        }
+#endif
 
         public void ColorChanged(Color color)
         {
@@ -219,7 +235,7 @@ namespace SignatureCapture.Sample
         /// </summary>
         private void SaveToSd()
         {
-            bool success = SignatureCapture.Library.SignatureCaptureUtils.SaveToPicturesFolder(m_SignatureCapture, "signaturecapture",
+            bool success = SignatureCapture.Library.SignatureCaptureUtils.SaveToSd(m_SignatureCapture, "signaturecapture",
                                                                     Guid.NewGuid().ToString());
 
             if (!success)

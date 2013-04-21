@@ -14,8 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+//#define TESTSAVE
 
 using System;
+using System.Collections.Generic;
 using Android.Content;
 using Android.Graphics;
 using Android.Util;
@@ -44,13 +46,27 @@ namespace SignatureCapture.Library
         Square = 2
     }
 
+#if TESTSAVE
+    public class SaveData : Java.Lang.Object
+    {
+        public List<Paint> Paints { get; set; }
+        public List<Path> Paths { get; set; }
+    }
+#endif
+    
+
     public class SignatureCaptureView : View
     {
+        
+
         private Canvas _canvas;
         private Path _path;
         private Paint _bitmapPaint;
         private Paint _paint;
-
+#if TESTSAVE
+        public SaveData CaptureSave { get; protected set; }
+        private SaveData m_ToLoad;
+#endif
 
         private float _mX, _mY;
         private const float TouchTolerance = 4;
@@ -79,6 +95,13 @@ namespace SignatureCapture.Library
         private void Init(Android.Content.Res.TypedArray attributes)
         {
             ResourceIdManager.UpdateIdValues();
+
+#if TESTSAVE
+            CaptureSave = new SaveData();
+            CaptureSave.Paints = new List<Paint>();
+            CaptureSave.Paths = new List<Path>();
+#endif
+
             _path = new Path();
             _bitmapPaint = new Paint(PaintFlags.Dither);
             _paint = new Paint
@@ -227,9 +250,9 @@ namespace SignatureCapture.Library
             }
         }
 
-        public Bitmap CanvasBitmap { get; private set; }
+     
 
-        
+           public Bitmap CanvasBitmap { get; private set; }
 
         /// <summary>
         /// gets or sets the color of the stroke
@@ -278,6 +301,15 @@ namespace SignatureCapture.Library
             base.OnSizeChanged(w, h, oldw, oldh);
             CanvasBitmap = Bitmap.CreateBitmap(w, h, Bitmap.Config.Argb8888);
             _canvas = new Canvas(CanvasBitmap);
+
+#if TESTSAVE
+            if (m_ToLoad != null)
+            {
+                LoadData(m_ToLoad);
+                CaptureSave = m_ToLoad;
+                m_ToLoad = null;
+            }
+#endif
         }
 
         protected override void OnDraw(Canvas canvas)
@@ -285,6 +317,7 @@ namespace SignatureCapture.Library
             canvas.DrawColor(BackgroundColor);
             canvas.DrawBitmap(CanvasBitmap, 0, 0, _bitmapPaint);
             canvas.DrawPath(_path, _paint);
+           
         }
 
         private void TouchStart(float x, float y)
@@ -308,10 +341,18 @@ namespace SignatureCapture.Library
             }
         }
 
+  
+
         private void TouchUp()
         {
             _path.LineTo(_mX, _mY);
             _canvas.DrawPath(_path, _paint);
+
+#if TESTSAVE
+            CaptureSave.Paints.Add(new Paint(_paint));
+            CaptureSave.Paths.Add(new Path(_path));
+#endif
+
             _path.Reset();
         }
 
@@ -338,11 +379,47 @@ namespace SignatureCapture.Library
             return true;
         }
 
+#region public methods
+
+#if TESTSAVE
+        public void UndoLastPath()
+        {
+            //quick hack... don't do it.
+            if (CaptureSave.Paints.Count != CaptureSave.Paths.Count || CaptureSave.Paths.Count == 0)
+                return;
+
+            ClearCanvas();
+
+            CaptureSave.Paths.RemoveAt(CaptureSave.Paths.Count - 1);
+            CaptureSave.Paints.RemoveAt(CaptureSave.Paints.Count - 1);
+            LoadData(CaptureSave);
+        }
+
+        private void LoadData(SaveData data)
+        {
+            //quick hack... don't do it.
+            if (data.Paints.Count != data.Paths.Count)
+                return;
+
+            for (int i = 0; i < data.Paints.Count; i++)
+            {
+                _canvas.DrawPath(data.Paths[i], data.Paints[i]);
+            }
+            Invalidate();
+        }
+
+        public void LoadSaveData(SaveData data)
+        {
+            m_ToLoad = data;
+        }
+#endif
+
         public void ClearCanvas()
         {
             _canvas.DrawColor(BackgroundColor);
             Invalidate();
         }
+#endregion
     }
 
 }
