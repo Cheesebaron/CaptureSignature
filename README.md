@@ -14,8 +14,8 @@ Signature Capture is development by Tomasz Cielecki ([@Cheesebaron](http://www.t
 
 
 ## Screenshots
-![Portrait](https://raw.github.com/jamesmontemagno/jamesmontemagno/MonoDroid.CaptureSignature/master/Screenshots/1.png)
-![Landscape](https://raw.github.com/jamesmontemagno/jamesmontemagno/MonoDroid.CaptureSignature/master/Screenshots/2.png)
+![Portrait](https://raw.github.com/jamesmontemagno/MonoDroid.CaptureSignature/master/Screenshots/1.png)
+![Landscape](https://raw.github.com/jamesmontemagno/MonoDroid.CaptureSignature/master/Screenshots/2.png)
 
 ## TODO
 * Implement undo/save state on capture
