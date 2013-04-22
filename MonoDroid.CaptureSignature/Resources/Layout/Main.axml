@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:sig="http://schemas.android.com/apk/res/com.refractored.signaturecapture"
     android:orientation="vertical"
     android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+  <signaturecapture.library.SignatureCaptureView
+    android:id="@+id/capture_view"
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
-  <Spinner
-    android:id="@+id/StrokeWidth"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:entries="@array/stroke_widths" 
-    />
-  <Button
-    android:id="@+id/StrokeOkButton"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:text="OK"/>
+    sig:stroke_width="30"
+    sig:paint_color="#00cc99"
+    sig:background_color="#000000"/>
+
 </LinearLayout>
