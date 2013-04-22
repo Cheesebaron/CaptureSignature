@@ -1,7 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDroid.CaptureSignature", "MonoDroid.CaptureSignature\MonoDroid.CaptureSignature.csproj", "{5F543A3D-8AF2-4FFB-8D69-E72449163826}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignatureCapture.Sample", "MonoDroid.CaptureSignature\SignatureCapture.Sample.csproj", "{5F543A3D-8AF2-4FFB-8D69-E72449163826}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignatureCapture.Library", "SignatureCapture.Library\SignatureCapture.Library.csproj", "{60F44E56-2420-40AA-AB74-3B88F386A51D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{5F543A3D-8AF2-4FFB-8D69-E72449163826}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F543A3D-8AF2-4FFB-8D69-E72449163826}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5F543A3D-8AF2-4FFB-8D69-E72449163826}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{60F44E56-2420-40AA-AB74-3B88F386A51D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60F44E56-2420-40AA-AB74-3B88F386A51D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60F44E56-2420-40AA-AB74-3B88F386A51D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60F44E56-2420-40AA-AB74-3B88F386A51D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
