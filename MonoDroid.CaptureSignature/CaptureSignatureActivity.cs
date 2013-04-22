@@ -136,13 +136,12 @@ namespace SignatureCapture.Sample
             dialog.SetContentView(Resource.Layout.stroke_width);
             var theSpinner = (Spinner) dialog.FindViewById(Resource.Id.StrokeWidth);
             theSpinner.Adapter = new ArrayAdapter<String>(this, Android.Resource.Layout.SimpleListItem1, Resources.GetStringArray(Resource.Array.stroke_widths));
-            theSpinner.ItemSelected += delegate(object sender, AdapterView.ItemSelectedEventArgs args)
-                                    {
-                                        var spinner = (Spinner)sender;
-                                        var strokeWidth = spinner.GetItemAtPosition(args.Position);
-                                        m_SignatureCapture.StrokeWidth = int.Parse(strokeWidth.ToString());
-                                    };
-            dialog.FindViewById(Resource.Id.StrokeOkButton).Click += (sender, args) => dialog.Dismiss();
+            dialog.FindViewById(Resource.Id.StrokeOkButton).Click += (sender, args) =>
+                {
+                    var strokeWidth = theSpinner.GetItemAtPosition(theSpinner.SelectedItemPosition);
+                    m_SignatureCapture.StrokeWidth = int.Parse(strokeWidth.ToString());
+                    dialog.Dismiss();
+                };
             dialog.Show();
         }
 
@@ -153,24 +152,23 @@ namespace SignatureCapture.Sample
             dialog.SetContentView(Resource.Layout.stroke_width);
             var theSpinner = (Spinner) dialog.FindViewById(Resource.Id.StrokeWidth);
             theSpinner.Adapter = new ArrayAdapter<String>(this, Android.Resource.Layout.SimpleListItem1, Resources.GetStringArray(Resource.Array.stroke_caps));
-            theSpinner.ItemSelected += delegate(object sender, AdapterView.ItemSelectedEventArgs args)
-                                    {
-                                        var spinner = (Spinner)sender;
-                                        var cap = spinner.GetItemAtPosition(args.Position).ToString();
-                                        switch (cap)
-                                        {
-                                            case "round":
-                                                m_SignatureCapture.StrokeCap = StrokeCap.Round;
-                                                break;
-                                            case "butt":
-                                                m_SignatureCapture.StrokeCap = StrokeCap.Butt;
-                                                break;
-                                            case "square":
-                                                m_SignatureCapture.StrokeCap = StrokeCap.Square;
-                                                break;
-                                        }
-                                    };
-            dialog.FindViewById(Resource.Id.StrokeOkButton).Click += (sender, args) => dialog.Dismiss();
+            dialog.FindViewById(Resource.Id.StrokeOkButton).Click += (sender, args) =>
+                {
+                    var cap = theSpinner.GetItemAtPosition(theSpinner.SelectedItemPosition).ToString();
+                    switch (cap)
+                    {
+                        case "round":
+                            m_SignatureCapture.StrokeCap = StrokeCap.Round;
+                            break;
+                        case "butt":
+                            m_SignatureCapture.StrokeCap = StrokeCap.Butt;
+                            break;
+                        case "square":
+                            m_SignatureCapture.StrokeCap = StrokeCap.Square;
+                            break;
+                    }
+                    dialog.Dismiss();
+                };
             dialog.Show();
         }
 
@@ -181,24 +179,23 @@ namespace SignatureCapture.Sample
              dialog.SetContentView(Resource.Layout.stroke_width);
              var theSpinner = (Spinner)dialog.FindViewById(Resource.Id.StrokeWidth);
              theSpinner.Adapter = new ArrayAdapter<String>(this, Android.Resource.Layout.SimpleListItem1, Resources.GetStringArray(Resource.Array.stroke_styles));
-             theSpinner.ItemSelected += delegate(object sender, AdapterView.ItemSelectedEventArgs args)
-             {
-                 var spinner = (Spinner)sender;
-                 var cap = spinner.GetItemAtPosition(args.Position).ToString();
-                 switch (cap)
+             dialog.FindViewById(Resource.Id.StrokeOkButton).Click += (sender, args) =>
                  {
-                     case "stroke":
-                         m_SignatureCapture.StrokeStyle = StrokeStyle.Stroke;
-                         break;
-                     case "fill":
-                         m_SignatureCapture.StrokeStyle = StrokeStyle.Fill;
-                         break;
-                     case "fill+stroke":
-                         m_SignatureCapture.StrokeStyle = StrokeStyle.FillAndStroke;
-                         break;
-                 }
-             };
-             dialog.FindViewById(Resource.Id.StrokeOkButton).Click += (sender, args) => dialog.Dismiss();
+                     var cap = theSpinner.GetItemAtPosition(theSpinner.SelectedItemPosition).ToString();
+                     switch (cap)
+                     {
+                         case "stroke":
+                             m_SignatureCapture.StrokeStyle = StrokeStyle.Stroke;
+                             break;
+                         case "fill":
+                             m_SignatureCapture.StrokeStyle = StrokeStyle.Fill;
+                             break;
+                         case "fill+stroke":
+                             m_SignatureCapture.StrokeStyle = StrokeStyle.FillAndStroke;
+                             break;
+                     }
+                     dialog.Dismiss();
+                 };
              dialog.Show();
          }
 
@@ -209,24 +206,24 @@ namespace SignatureCapture.Sample
              dialog.SetContentView(Resource.Layout.stroke_width);
              var theSpinner = (Spinner)dialog.FindViewById(Resource.Id.StrokeWidth);
              theSpinner.Adapter = new ArrayAdapter<String>(this, Android.Resource.Layout.SimpleListItem1, Resources.GetStringArray(Resource.Array.stroke_joins));
-             theSpinner.ItemSelected += delegate(object sender, AdapterView.ItemSelectedEventArgs args)
-             {
-                 var spinner = (Spinner)sender;
-                 var cap = spinner.GetItemAtPosition(args.Position).ToString();
-                 switch (cap)
+            
+             dialog.FindViewById(Resource.Id.StrokeOkButton).Click += (sender, args) =>
                  {
-                     case "round":
-                         m_SignatureCapture.StrokeJoin = StrokeJoin.Round;
-                         break;
-                     case "miter":
-                         m_SignatureCapture.StrokeJoin = StrokeJoin.Miter;
-                         break;
-                     case "bevel":
-                         m_SignatureCapture.StrokeJoin = StrokeJoin.Bevel;
-                         break;
-                 }
-             };
-             dialog.FindViewById(Resource.Id.StrokeOkButton).Click += (sender, args) => dialog.Dismiss();
+                     var cap = theSpinner.GetItemAtPosition(theSpinner.SelectedItemPosition).ToString();
+                     switch (cap)
+                     {
+                         case "round":
+                             m_SignatureCapture.StrokeJoin = StrokeJoin.Round;
+                             break;
+                         case "miter":
+                             m_SignatureCapture.StrokeJoin = StrokeJoin.Miter;
+                             break;
+                         case "bevel":
+                             m_SignatureCapture.StrokeJoin = StrokeJoin.Bevel;
+                             break;
+                     }
+                     dialog.Dismiss();
+                 };
              dialog.Show();
          }
 

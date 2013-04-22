@@ -39,3 +39,9 @@ using Android.App;
 // Add some common permissions, these can be removed if not needed
 [assembly: UsesPermission(Android.Manifest.Permission.Internet)]
 [assembly: UsesPermission(Android.Manifest.Permission.WriteExternalStorage)]
+
+#if RELEASE 
+[assembly: Application(Debuggable = false, Icon = "@drawable/ic_launcher", Label ="Signature Capture")] 
+#else
+[assembly: Application(Debuggable = true, Icon = "@drawable/ic_launcher", Label ="Signature Capture")]
+#endif
