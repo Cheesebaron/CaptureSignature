@@ -42,7 +42,7 @@ namespace SignatureCapture.Library
                             (string.IsNullOrWhiteSpace(folderName) ? "MySignatures" : folderName);
                 var extFileName = folder +
                                   Java.IO.File.Separator +
-                                  (string.IsNullOrWhiteSpace(fileName) ? Guid.NewGuid().ToString() : fileName) + ".png";
+                                  (string.IsNullOrWhiteSpace(fileName) ? DateTime.Now.ToString("yyyyMMdd_HHmmss") : fileName) + ".png";
 
                 if (!Directory.Exists(folder))
                     Directory.CreateDirectory(folder);
@@ -76,7 +76,7 @@ namespace SignatureCapture.Library
                             (string.IsNullOrWhiteSpace(folderName) ? "MySignatures" : folderName);
                 var extFileName = folder +
                                   Java.IO.File.Separator +
-                                  (string.IsNullOrWhiteSpace(fileName) ? Guid.NewGuid().ToString() : fileName) + ".png";
+                                  (string.IsNullOrWhiteSpace(fileName) ? DateTime.Now.ToString("yyyyMMdd_HHmmss") : fileName) + ".png";
 
                 if (!Directory.Exists(folder))
                     Directory.CreateDirectory(folder);

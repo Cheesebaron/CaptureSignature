@@ -235,8 +235,7 @@ namespace SignatureCapture.Sample
         /// </summary>
         private void SaveToSd()
         {
-            bool success = SignatureCapture.Library.SignatureCaptureUtils.SaveToSd(m_SignatureCapture, "signaturecapture",
-                                                                    Guid.NewGuid().ToString());
+            bool success = SignatureCapture.Library.SignatureCaptureUtils.SaveToSd(m_SignatureCapture, "Signature Capture", null);
 
             if (!success)
             {
